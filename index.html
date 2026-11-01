@@ -5,33 +5,35 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Владимир — сайты под ключ для бизнеса</title>
   <meta name="description" content="Проектирую и запускаю сайты под ключ для бизнеса: лендинги, сайты компаний, интернет-магазины. Работы, кейсы, отзывы клиентов.">
-  <meta name="theme-color" content="#1c1c1c">
+  <meta name="theme-color" content="#f3f2ee">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fira+Sans+Extra+Condensed:wght@600;700&family=Onest:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
   <script>document.documentElement.classList.add('js')</script>
 </head>
 <body>
 
 <a class="skip" href="#main">К содержанию</a>
+<div class="progress" id="progress" aria-hidden="true"></div>
 
 <header class="bar" id="bar">
-  <a class="bar__mark" href="#top" data-owner-name>Владимир</a>
+  <a class="bar__mark" href="#top"><span class="bar__dot" aria-hidden="true"></span><span data-owner-name>Владимир</span></a>
   <button class="bar__menu" type="button" aria-expanded="false" aria-controls="nav" id="menuBtn">Меню</button>
   <nav class="bar__nav" id="nav" aria-label="Разделы">
     <a href="#work">Работы</a>
     <a href="#cases">Кейсы</a>
+    <a href="#process">Как я работаю</a>
     <a href="#reviews">Отзывы</a>
     <a href="#contact">Контакты</a>
   </nav>
-  <a class="btn btn--accent bar__cta" href="#contact">Обсудить проект</a>
+  <a class="btn btn--ink bar__cta" href="#contact">Обсудить проект</a>
 </header>
 
 <main id="main">
 
   <!-- ============ ПЕРВЫЙ ЭКРАН ============ -->
-  <section class="hero" id="top" data-chapter="light">
+  <section class="hero card" id="top">
     <div class="hero__fields" aria-hidden="true"><span></span><span></span></div>
     <h1 class="hero__title">
       <span class="hero__copy hero__copy--top"><span class="l1">Сайты,</span> <span class="l2">которые продают</span></span>
@@ -40,42 +42,50 @@
     <div class="hero__foot">
       <p class="hero__lead">Проектирую и запускаю сайты под ключ для бизнеса: от первого звонка до первых заявок.</p>
       <div class="hero__actions">
-        <a class="btn btn--accent btn--lg" href="#contact">Обсудить проект</a>
-        <a class="hero__link" href="#work">Смотреть работы</a>
+        <a class="btn btn--accent btn--lg" href="#contact">Обсудить проект <span class="btn__arrow" aria-hidden="true">→</span></a>
+        <a class="btn btn--glass btn--lg" href="#work">Смотреть работы</a>
       </div>
     </div>
   </section>
 
+  <!-- ============ БЕГУЩАЯ СТРОКА ============ -->
+  <div class="ticker" aria-hidden="true">
+    <div class="ticker__track">
+      <span>Лендинги</span><i></i><span>Сайты компаний</span><i></i><span>Интернет-магазины</span><i></i><span>Редизайн</span><i></i><span>Поддержка</span><i></i>
+      <span>Лендинги</span><i></i><span>Сайты компаний</span><i></i><span>Интернет-магазины</span><i></i><span>Редизайн</span><i></i><span>Поддержка</span><i></i>
+    </div>
+  </div>
+
   <!-- ============ ПОДХОД ============ -->
-  <section class="stair" id="about" data-chapter="dark" aria-labelledby="about-h">
+  <section class="stair card card--white" id="about" aria-labelledby="about-h">
     <div class="stair__main">
-      <h2 class="stair__text rv" id="about-h"><span>Пять секунд,</span> <span>чтобы вас выбрали</span></h2>
+      <h2 class="stair__text rv" id="about-h"><span>Пять секунд,</span> <span>чтобы вас <mark>выбрали</mark></span></h2>
       <p class="stair__lead rv">Столько посетитель решает, остаться на сайте или уйти. Я делаю сайты, которые за эти секунды объясняют, чем вы лучше других, и сразу просят заявку.</p>
+      <p class="stair__note rv">Я не продаю шаблоны. Каждый сайт собираю под ваш бизнес, ваших клиентов и одну задачу — чтобы вам писали.</p>
     </div>
     <div class="stair__photos">
       <img class="rv" src="assets/photos/camera.jpg" width="1200" height="800" alt="Руки держат старый дальномерный фотоаппарат" loading="lazy">
       <img class="rv" src="assets/photos/tools.jpg" width="1200" height="800" alt="Инструменты и рабочие перчатки на тёмном дереве" loading="lazy">
     </div>
-    <p class="stair__note rv">Я не продаю шаблоны. Каждый сайт собираю под ваш бизнес, <br>ваших клиентов и одну задачу — чтобы вам писали.</p>
   </section>
 
   <!-- ============ УСЛУГИ ============ -->
-  <section class="services" id="services" data-chapter="light" aria-labelledby="services-h">
-    <div class="services__head">
+  <section class="services card card--peach" id="services" aria-labelledby="services-h">
+    <div class="head">
       <h2 class="h2 rv" id="services-h">Что я делаю</h2>
       <p class="rv">Беру проект целиком: структура, тексты, дизайн, разработка, запуск. Вам не нужно искать дизайнера, верстальщика и копирайтера отдельно.</p>
     </div>
     <ul class="services__list">
-      <li class="rv"><span class="services__name">Лендинги</span><span class="services__desc">Одна страница под одну услугу или рекламную кампанию. Быстрый запуск, максимум заявок.</span></li>
-      <li class="rv"><span class="services__name">Сайты компаний</span><span class="services__desc">Услуги, цены, примеры работ, команда и контакты — всё, чтобы клиент выбрал вас.</span></li>
-      <li class="rv"><span class="services__name">Интернет-магазины</span><span class="services__desc">Каталог, корзина, оплата и доставка. Удобное управление товарами без программиста.</span></li>
-      <li class="rv"><span class="services__name">Редизайн</span><span class="services__desc">Беру устаревший сайт и превращаю в современный, быстрый и понятный с телефона.</span></li>
-      <li class="rv"><span class="services__name">Поддержка</span><span class="services__desc">Правки, новые страницы, хостинг и домен. Сайт продолжает работать, пока вы заняты делом.</span></li>
+      <li class="rv"><span class="services__name">Лендинги</span><span class="services__desc">Одна страница под одну услугу или рекламную кампанию. Быстрый запуск, максимум заявок.</span><span class="services__go" aria-hidden="true">→</span></li>
+      <li class="rv"><span class="services__name">Сайты компаний</span><span class="services__desc">Услуги, цены, примеры работ, команда и контакты — всё, чтобы клиент выбрал вас.</span><span class="services__go" aria-hidden="true">→</span></li>
+      <li class="rv"><span class="services__name">Интернет-магазины</span><span class="services__desc">Каталог, корзина, оплата и доставка. Удобное управление товарами без программиста.</span><span class="services__go" aria-hidden="true">→</span></li>
+      <li class="rv"><span class="services__name">Редизайн</span><span class="services__desc">Беру устаревший сайт и превращаю в современный, быстрый и понятный с телефона.</span><span class="services__go" aria-hidden="true">→</span></li>
+      <li class="rv"><span class="services__name">Поддержка</span><span class="services__desc">Правки, новые страницы, хостинг и домен. Сайт продолжает работать, пока вы заняты делом.</span><span class="services__go" aria-hidden="true">→</span></li>
     </ul>
   </section>
 
   <!-- ============ РАБОТЫ ============ -->
-  <section class="work" id="work" data-chapter="dark" aria-labelledby="work-h">
+  <section class="work card card--white" id="work" aria-labelledby="work-h">
     <div class="work__col">
       <h2 class="h2 rv" id="work-h">Работы</h2>
       <p class="work__lead rv">Сайты, которые я сделал и запустил. Наведите на строку, чтобы увидеть сайт.</p>
@@ -85,8 +95,8 @@
   </section>
 
   <!-- ============ КЕЙСЫ ============ -->
-  <section class="cases" id="cases" data-chapter="surface" aria-labelledby="cases-h">
-    <div class="cases__head">
+  <section class="cases card card--sky" id="cases" aria-labelledby="cases-h">
+    <div class="head">
       <h2 class="h2 rv" id="cases-h">Кейсы</h2>
       <p class="rv">Как я работаю на деле: с какой задачей пришёл клиент, что я сделал и что это дало бизнесу.</p>
     </div>
@@ -94,17 +104,17 @@
   </section>
 
   <!-- ============ РАЗНИЦА ============ -->
-  <section class="versus" data-chapter="light" aria-labelledby="versus-h">
-    <div class="versus__head">
+  <section class="versus card card--butter" aria-labelledby="versus-h">
+    <div class="head">
       <h2 class="h2 rv" id="versus-h">Визитка или продавец</h2>
-      <p class="rv">Большинство сайтов просто есть: висят в интернете, как визитка в ящике стола. Я делаю сайты, которые работают как лучший менеджер по продажам — круглосуточно, без выходных и без зарплаты.</p>
+      <p class="rv">Большинство сайтов просто есть: висят в интернете, как визитка в ящике стола. Я делаю сайты, которые работают как лучший менеджер по продажам — круглосуточно и без выходных.</p>
     </div>
     <div class="versus__pair">
-      <figure class="versus__item">
+      <figure class="versus__item rv">
         <div class="versus__word">есть</div>
         <figcaption>Обычный сайт просто есть</figcaption>
       </figure>
-      <figure class="versus__item versus__item--ours">
+      <figure class="versus__item versus__item--ours rv">
         <div class="versus__word">продаёт</div>
         <figcaption>Сайт, который делаю я, продаёт</figcaption>
       </figure>
@@ -112,47 +122,32 @@
   </section>
 
   <!-- ============ ФОТО-ПАУЗА ============ -->
-  <section class="band" data-chapter="dark" aria-label="Ручная работа">
-    <img class="band__img" src="assets/photos/pour.jpg" width="2400" height="1200" alt="Вода из чайника льётся в воронку для кофе" loading="lazy">
-    <p class="band__caption">Как хороший кофе: никаких полуфабрикатов, каждую деталь — руками.</p>
+  <section class="band" aria-label="Ручная работа">
+    <div class="band__frame card">
+      <img class="band__img" src="assets/photos/pour.jpg" width="2400" height="1200" alt="Вода из чайника льётся в воронку для кофе" loading="lazy">
+      <p class="band__caption">Как хороший кофе: никаких полуфабрикатов, каждую деталь — руками.</p>
+    </div>
   </section>
 
   <!-- ============ ПРОЦЕСС ============ -->
-  <section class="process" id="process" data-chapter="dark" aria-labelledby="process-h">
-    <div class="process__head">
+  <section class="process card card--white" id="process" aria-labelledby="process-h">
+    <div class="head">
       <h2 class="h2 rv" id="process-h">Как я работаю</h2>
-      <p class="rv">Прозрачно и по шагам. На каждом этапе вы видите результат и даёте обратную связь — никаких сюрпризов в конце.</p>
-      <img class="process__img rv" src="assets/photos/mixer.jpg" width="1200" height="800" alt="Рука двигает фейдеры на микшерном пульте" loading="lazy">
+      <p class="rv">Честно и прозрачно. На каждом этапе вы видите результат и даёте обратную связь — никаких сюрпризов в конце. Сроки и стоимость обсуждаем лично, под ваш проект.</p>
     </div>
-    <div class="slip rv" role="table" aria-label="Этапы работы">
-      <div class="slip__group" role="rowgroup">
-        <p class="slip__when">Первый день</p>
-        <div class="slip__row" role="row"><span role="cell">Знакомство и бриф</span><i></i><span role="cell">1 час</span></div>
-        <div class="slip__row" role="row"><span role="cell">Оценка, смета и сроки</span><i></i><span role="cell">1 день</span></div>
-      </div>
-      <div class="slip__group" role="rowgroup">
-        <p class="slip__when">Первая неделя</p>
-        <div class="slip__row" role="row"><span role="cell">Структура и прототип</span><i></i><span role="cell">2–3 дня</span></div>
-        <div class="slip__row" role="row"><span role="cell">Дизайн ключевых экранов</span><i></i><span role="cell">2 дня</span></div>
-      </div>
-      <div class="slip__group" role="rowgroup">
-        <p class="slip__when">Вторая неделя</p>
-        <div class="slip__row" role="row"><span role="cell">Разработка и вёрстка</span><i></i><span role="cell">4–5 дней</span></div>
-        <div class="slip__row" role="row"><span role="cell">Формы, аналитика, SEO</span><i></i><span role="cell">1 день</span></div>
-      </div>
-      <div class="slip__group" role="rowgroup">
-        <p class="slip__when">Запуск</p>
-        <div class="slip__row" role="row"><span role="cell">Проверка на всех устройствах</span><i></i><span role="cell">1 день</span></div>
-        <div class="slip__row" role="row"><span role="cell">Публикация и обучение</span><i></i><span role="cell">1 день</span></div>
-      </div>
-      <div class="slip__total" role="row"><span role="cell">Готовый сайт, который приносит заявки</span><span role="cell">≈ 2 недели</span></div>
-    </div>
+    <ol class="steps">
+      <li class="step rv"><span class="step__n" aria-hidden="true"></span><h3>Знакомство</h3><p>Созваниваемся, разбираю ваш бизнес, клиентов и задачу сайта.</p></li>
+      <li class="step rv"><span class="step__n" aria-hidden="true"></span><h3>Структура</h3><p>Показываю план страниц и прототип. Утверждаем до дизайна.</p></li>
+      <li class="step rv"><span class="step__n" aria-hidden="true"></span><h3>Дизайн</h3><p>Делаю дизайн ключевых экранов и согласую его с вами.</p></li>
+      <li class="step rv"><span class="step__n" aria-hidden="true"></span><h3>Разработка</h3><p>Собираю сайт, подключаю формы, аналитику и SEO. Вы видите прогресс.</p></li>
+      <li class="step rv"><span class="step__n" aria-hidden="true"></span><h3>Запуск</h3><p>Проверяю на всех устройствах, публикую и показываю, как управлять.</p></li>
+    </ol>
   </section>
 
   <!-- ============ ОТЗЫВЫ ============ -->
-  <section class="reviews" id="reviews" data-chapter="accent" aria-labelledby="reviews-h">
+  <section class="reviews card card--sage" id="reviews" aria-labelledby="reviews-h">
     <h2 class="h2 reviews__h rv" id="reviews-h">Отзывы</h2>
-    <div class="spread" id="spread"><!-- главный отзыв --></div>
+    <div class="spread rv" id="spread"><!-- главный отзыв --></div>
     <div class="reviews__body">
       <div class="reviews__list" id="reviewList"></div>
       <form class="rform" id="reviewForm" novalidate>
@@ -188,11 +183,11 @@
   </section>
 
   <!-- ============ КОНТАКТЫ ============ -->
-  <section class="contact" id="contact" data-chapter="dark" aria-labelledby="contact-h">
+  <section class="contact card card--white" id="contact" aria-labelledby="contact-h">
     <div class="brief">
       <div class="brief__head">
         <h2 class="h2 rv" id="contact-h">Обсудим ваш сайт</h2>
-        <p class="rv">Выберите, что вам нужно, — я соберу из этого сообщение. Останется только отправить.</p>
+        <p class="rv">Выберите, что вам нужно, — я соберу из этого сообщение. Останется только отправить. Или напишите мне напрямую.</p>
       </div>
       <div class="brief__pick" id="brief">
         <fieldset>
@@ -227,24 +222,24 @@
         <p class="brief__label" id="briefLabel">Ваше сообщение</p>
         <p class="brief__msg" id="briefMsg" aria-labelledby="briefLabel">Здравствуйте! Хочу заказать лендинг. Сроки: в течение месяца.</p>
         <div class="brief__actions">
-          <button class="btn btn--accent" type="button" id="briefSend">Отправить</button>
+          <button class="btn btn--accent" type="button" id="briefSend">Отправить <span class="btn__arrow" aria-hidden="true">→</span></button>
           <button class="btn btn--ghost" type="button" id="briefCopy">Скопировать</button>
         </div>
         <p class="brief__status" id="briefStatus" role="status" aria-live="polite"></p>
       </div>
     </div>
 
-    <ul class="rows" id="contactRows"><!-- заполняется из content.js --></ul>
+    <ul class="ctiles" id="contactTiles"><!-- заполняется из content.js --></ul>
   </section>
 
 </main>
 
 <!-- ============ ПОДВАЛ ============ -->
-<footer class="foot" data-chapter="light">
+<footer class="foot card">
   <div class="foot__top">
     <div class="foot__invite">
       <p class="foot__title">Нужен сайт,<br>который продаёт?</p>
-      <a class="btn btn--ink btn--lg" href="#contact">Обсудить проект</a>
+      <a class="btn btn--accent btn--lg" href="#contact">Обсудить проект <span class="btn__arrow" aria-hidden="true">→</span></a>
     </div>
     <ul class="foot__links" id="footLinks"></ul>
   </div>

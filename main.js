@@ -24,7 +24,7 @@
     if (w.image) {
       return '<img class="shot" src="' + esc(w.image) + '" alt="Сайт ' + esc(w.title) + '" width="1600" height="1000" loading="lazy">';
     }
-    var c = w.colors || ['#2a2a2a', '#f1f1ef', '#8fa68e'];
+    var c = w.colors || ['#141416', '#ffffff', '#d4f458'];
     var brand = String(w.title).replace(/^[^«]*«|»$/g, '') || w.title;
     return '<div class="still" data-ui style="--s-bg:' + esc(c[0]) + ';--s-ink:' + esc(c[1]) + ';--s-accent:' + esc(c[2]) + '" role="img" aria-label="Первый экран сайта ' + esc(w.title) + '">' +
       '<div class="still__nav"><b>' + esc(brand) + '</b><span>Услуги</span><span>О нас</span><span>Контакты</span></div>' +
@@ -54,7 +54,7 @@
   if (!works.length) {
     $('.work__lead').textContent = 'Портфолио обновляется: новые работы появятся здесь совсем скоро.';
     ledger.innerHTML = '<li class="ledger__empty">' +
-      still({ title: 'Ваш бизнес', kind: 'Ваш проект', tagline: 'Здесь может быть ваш сайт', colors: ['#c8c5ba', '#1c1c1c', '#8fa68e'] }) +
+      still({ title: 'Ваш бизнес', kind: 'Ваш проект', tagline: 'Здесь может быть ваш сайт', colors: ['#e1ebdc', '#141416', '#d4f458'] }) +
       '<a class="btn btn--accent" href="#contact">Обсудить проект</a></li>';
   }
 
@@ -105,7 +105,7 @@
       '<p class="case__result rv"><b>Результат.</b> Измеримый итог: сколько заявок и клиентов принёс новый сайт.</p>' +
       '<a class="btn btn--accent case__cta rv" href="#contact">Стать следующим кейсом</a>' +
       '</div>' +
-      '<div class="case__media rv">' + still({ title: 'Ваш бизнес', kind: 'Ваш проект', tagline: 'Ваш новый сайт', colors: ['#8fa68e', '#1c1c1c', '#1c1c1c'] }) + '</div>' +
+      '<div class="case__media rv">' + still({ title: 'Ваш бизнес', kind: 'Ваш проект', tagline: 'Ваш новый сайт', colors: ['#141416', '#ffffff', '#d4f458'] }) + '</div>' +
       '</article>';
   }
 
@@ -191,22 +191,20 @@
   });
 
   /* ---------- контакты ---------- */
-  var arrow = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><path d="M4 12h15M13 5l7 7-7 7"/></svg>';
   var tg = C.telegram ? String(C.telegram).replace(/^@/, '') : '';
   var wa = C.whatsapp ? String(C.whatsapp).replace(/\D/g, '') : '';
-  var primary = tg ? 'https://t.me/' + tg : wa ? 'https://wa.me/' + wa : C.email ? 'mailto:' + C.email : '#brief';
-  function row(k, v, href, ext) {
-    if (!v) return '<li><div class="rows__item"><span class="rows__k">' + k + '</span> <span class="rows__soon">скоро</span></div></li>';
-    if (!href) return '<li><div class="rows__item">' + (k ? '<span class="rows__k">' + k + '</span> ' : '') + esc(v) + '</div></li>';
-    return '<li><a href="' + esc(href) + '"' + (ext ? ' target="_blank" rel="noopener"' : '') + '><span class="rows__k">' + k + '</span> ' + esc(v) + '</a></li>';
+  function tile(k, v, href, ext) {
+    if (!v) return '';
+    return '<li class="rv"><a class="ctile" href="' + esc(href) + '"' + (ext ? ' target="_blank" rel="noopener"' : '') + '>' +
+      '<span class="ctile__k">' + k + '</span><span class="ctile__v">' + esc(v) + '</span>' +
+      '<span class="ctile__go" aria-hidden="true">→</span></a></li>';
   }
-  $('#contactRows').innerHTML =
-    row('Telegram', tg && '@' + tg, tg && 'https://t.me/' + tg, true) +
-    row('WhatsApp', wa && C.phone ? C.phone : wa && '+' + wa, wa && 'https://wa.me/' + wa, true) +
-    row('Почта', C.email, C.email && 'mailto:' + C.email) +
-    row('Телефон', C.phone, C.phone && 'tel:' + String(C.phone).replace(/[^\d+]/g, '')) +
-    row('', owner.city || 'Онлайн по всей России', '') +
-    '<li><a href="' + esc(primary) + '"' + (primary.indexOf('http') === 0 ? ' target="_blank" rel="noopener"' : '') + '>Напишите мне<span class="rows__go">' + arrow + '</span></a></li>';
+  $('#contactTiles').innerHTML =
+    tile('Telegram', tg && '@' + tg, 'https://t.me/' + tg, true) +
+    tile('WhatsApp', wa && (C.phone || '+' + wa), 'https://wa.me/' + wa, true) +
+    tile('Почта', C.email, 'mailto:' + C.email) +
+    tile('Телефон', C.phone, 'tel:' + String(C.phone || '').replace(/[^\d+]/g, '')) +
+    '<li class="ctiles__note">' + esc(owner.city || 'Работаю онлайн') + ' · отвечаю в течение дня</li>';
 
   var links = [];
   if (tg) links.push('<a href="https://t.me/' + esc(tg) + '" target="_blank" rel="noopener">Telegram</a>');
@@ -244,6 +242,7 @@
       $$('button', group).forEach(function (x) { x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
     }
     msgEl.textContent = buildMsg();
+    msgEl.classList.remove('flash'); void msgEl.offsetWidth; msgEl.classList.add('flash');
     bStatus.textContent = '';
   });
   function copy(text) {
@@ -275,40 +274,17 @@
     a.addEventListener('click', function () { bar.classList.remove('open'); menuBtn.setAttribute('aria-expanded', 'false'); menuBtn.textContent = 'Меню'; });
   });
 
-  /* ---------- зубчатый край чека ---------- */
-  var slip = $('.slip');
-  if (slip) {
-    var n = 26, pts = ['0 0', '100% 0'];
-    for (var i = n; i >= 0; i--) pts.push((i / n * 100).toFixed(2) + '% ' + (i % 2 ? 'calc(100% - 12px)' : '100%'));
-    slip.style.clipPath = 'polygon(' + pts.join(',') + ')';
-  }
-
-  /* ---------- шапка берёт цвет главы ---------- */
-  var chapters = $$('[data-chapter]');
-  var hero = $('.hero');
-  function chapterAtBar() {
-    var y = bar.offsetHeight / 2;
-    for (var i = 0; i < chapters.length; i++) {
-      var r = chapters[i].getBoundingClientRect();
-      if (r.top <= y && r.bottom > y) {
-        if (chapters[i] === hero) {
-          var seam = parseFloat(getComputedStyle(hero).getPropertyValue('--seam')) / 100 || .5;
-          return y < r.top + r.height * seam ? 'light' : 'dark';
-        }
-        return chapters[i].dataset.chapter;
-      }
-    }
-    return 'dark';
-  }
-
-  /* ---------- фото-пауза: медленный наезд ---------- */
+  /* ---------- прокрутка: шапка, полоска прогресса, наезд на фото ---------- */
+  var progress = $('#progress');
   var bandImg = $('.band__img');
   var ticking = false;
   function onScroll() {
     if (ticking) return;
     ticking = true;
     requestAnimationFrame(function () {
-      bar.dataset.on = chapterAtBar();
+      var max = document.documentElement.scrollHeight - window.innerHeight;
+      progress.style.transform = 'scaleX(' + (max > 0 ? Math.min(1, window.scrollY / max) : 0).toFixed(4) + ')';
+      bar.classList.toggle('scrolled', window.scrollY > 24);
       if (bandImg && !reduced) {
         var r = bandImg.getBoundingClientRect();
         var p = Math.min(1, Math.max(0, 1 - (r.top + r.height) / (window.innerHeight + r.height)));
