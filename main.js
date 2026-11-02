@@ -35,45 +35,32 @@
 
   /* ---------- работы ---------- */
   var works = S.works || [];
-  var ledger = $('#ledger');
-  var lastYear = null;
-  ledger.innerHTML = works.map(function (w, i) {
-    var gap = lastYear !== null && w.year !== lastYear ? ' class="ledger__yeargap"' : '';
-    lastYear = w.year;
-    var href = w.url ? esc(w.url) : '#cases';
-    var ext = w.url ? ' target="_blank" rel="noopener"' : '';
-    return '<li' + gap + '>' +
-      '<div class="ledger__thumb">' + still(w) + '</div>' +
-      '<a class="ledger__row" href="' + href + '"' + ext + ' data-i="' + i + '">' +
-      '<span><span class="ledger__name">' + esc(w.title) + '</span></span>' +
-      '<span class="ledger__kind">' + esc(w.kind) + '</span>' +
-      '<span class="ledger__year">' + esc(w.year) + '</span></a></li>';
+  var grid = $('#workGrid');
+  var arrowSvg = '<span class="btn__arrow" aria-hidden="true">→</span>';
+  grid.innerHTML = works.map(function (w) {
+    var url = w.url ? esc(w.url) : '';
+    var media = url
+      ? '<a class="wcard__media" href="' + url + '" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true">' + still(w) + '</a>'
+      : '<div class="wcard__media">' + still(w) + '</div>';
+    var tags = (w.tags || []).map(function (t) { return '<li>' + esc(t) + '</li>'; }).join('');
+    return '<li class="wcard rv">' + media +
+      '<div class="wcard__body">' +
+      '<p class="wcard__meta">' + [w.kind, w.year].filter(Boolean).map(esc).join(' · ') + '</p>' +
+      '<h3 class="wcard__title">' + esc(w.title) + '</h3>' +
+      (w.desc ? '<p class="wcard__desc">' + esc(w.desc) + '</p>' : '') +
+      (tags ? '<ul class="wcard__tags">' + tags + '</ul>' : '') +
+      (url ? '<a class="btn btn--ink wcard__btn" href="' + url + '" target="_blank" rel="noopener">Открыть сайт ' + arrowSvg + '</a>' : '') +
+      '</div></li>';
   }).join('');
 
   // Пока работ нет — заглушка
   if (!works.length) {
     $('.work__lead').textContent = 'Портфолио обновляется: новые работы появятся здесь совсем скоро.';
-    ledger.innerHTML = '<li class="ledger__empty">' +
+    grid.innerHTML = '<li class="wcard rv"><div class="wcard__media">' +
       still({ title: 'Ваш бизнес', kind: 'Ваш проект', tagline: 'Здесь может быть ваш сайт', colors: ['#e1ebdc', '#141416', '#d4f458'] }) +
-      '<a class="btn btn--accent" href="#contact">Обсудить проект</a></li>';
+      '</div><div class="wcard__body"><h3 class="wcard__title">Здесь может быть ваш сайт</h3>' +
+      '<a class="btn btn--accent wcard__btn" href="#contact">Обсудить проект ' + arrowSvg + '</a></div></li>';
   }
-
-  var preview = $('#preview');
-  var workSec = $('#work');
-  function showPreview(a) {
-    var w = works[+a.dataset.i];
-    if (!w) return;
-    preview.innerHTML = still(w);
-    var top = a.getBoundingClientRect().top - workSec.getBoundingClientRect().top;
-    preview.style.top = Math.max(0, top - 40) + 'px';
-    preview.classList.add('on');
-  }
-  $$('.ledger__row').forEach(function (a) {
-    a.addEventListener('mouseenter', function () { showPreview(a); });
-    a.addEventListener('focus', function () { showPreview(a); });
-  });
-  ledger.addEventListener('mouseleave', function () { preview.classList.remove('on'); });
-  ledger.addEventListener('focusout', function (e) { if (!ledger.contains(e.relatedTarget)) preview.classList.remove('on'); });
 
   /* ---------- кейсы ---------- */
   var byTitle = {};

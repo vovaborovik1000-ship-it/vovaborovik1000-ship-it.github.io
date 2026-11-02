@@ -242,34 +242,26 @@ fieldset { border: 0; margin: 0; padding: 0; min-width: 0; }
 .services__list li:hover .services__go { background: var(--accent); transform: rotate(-45deg); }
 
 /* ---------- работы ---------- */
-.work { min-height: 70svh; }
-.work__col { width: min(700px, 100%); margin-left: 16%; }
-.work__lead { margin: 20px 0 40px; max-width: 44ch; color: var(--muted); }
-.ledger__row {
-  display: grid; grid-template-columns: 1fr 0.8fr 56px; align-items: center; gap: 16px;
-  min-height: 56px; padding: 0 16px; margin: 0 -16px;
-  border-radius: var(--r-sm); text-decoration: none;
-  transition: background-color .25s, color .25s;
+.work__lead { max-width: 44ch; }
+.workgrid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.wcard {
+  display: grid; gap: 0; background: var(--page); border-radius: var(--r-lg);
+  padding: 12px; overflow: hidden;
+  transition: transform .5s var(--spring), background-color .3s;
 }
-.ledger__name { font-weight: 500; display: inline-block; transition: transform .35s var(--spring); }
-.ledger__kind, .ledger__year { font-size: var(--step-small); color: var(--muted); }
-.ledger__year { text-align: right; font-variant-numeric: tabular-nums; }
-.ledger li + li.ledger__yeargap { margin-top: 24px; }
-.ledger__row:hover, .ledger__row:focus-visible { background: var(--page); }
-.ledger__row:hover .ledger__name { transform: translateX(6px); }
-.ledger__thumb { display: none; }
-.ledger__empty { display: grid; gap: 24px; justify-items: start; }
-.ledger__empty .still { width: 100%; }
-
-.work__preview {
-  position: absolute; top: 0;
-  left: calc(var(--pad-x) + 16% + min(700px, 100%) + 48px);
-  width: min(440px, calc(100% - 16% - 700px - 48px - var(--pad-x) * 2));
-  opacity: 0; transform: translateY(10px) scale(.98);
-  transition: opacity .2s, transform .45s var(--spring), top .4s var(--ease);
-  pointer-events: none;
-}
-.work__preview.on { opacity: 1; transform: none; }
+.wcard:hover { transform: translateY(-4px); }
+.wcard:first-child { grid-column: 1 / -1; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); align-items: center; }
+.wcard__media { display: block; border-radius: var(--r-md); overflow: hidden; }
+.wcard__media .shot, .wcard__media .still { border-radius: 0; transition: transform .8s var(--ease); }
+.wcard:hover .wcard__media .shot, .wcard:hover .wcard__media .still { transform: scale(1.035); }
+.wcard__body { padding: clamp(20px, 3vw, 44px); display: grid; gap: 14px; justify-items: start; }
+.wcard__meta { font-size: var(--step-small); color: var(--muted); }
+.wcard__title { font: 700 clamp(2rem, 1.2rem + 2.6vw, 3.75rem)/1 var(--font); letter-spacing: -0.045em; }
+.wcard__desc { color: var(--muted); max-width: 46ch; }
+.wcard__tags { display: flex; flex-wrap: wrap; gap: 6px; }
+.wcard__tags li { padding: 7px 14px; border-radius: 999px; background: var(--white); font-size: var(--step-small); }
+.wcard__tags li:first-child { background: var(--accent); }
+.wcard__btn { margin-top: 10px; }
 
 /* превью сайта: нарисованный первый экран работы */
 .still {
@@ -501,10 +493,7 @@ a.ctile:hover .ctile__go { background: var(--accent); transform: rotate(-45deg);
 
 /* ---------- планшет ---------- */
 @media (max-width: 1100px) {
-  .work__col { margin-left: 0; }
-  .work__preview { display: none; }
-  .ledger li:nth-child(-n+3) .ledger__thumb { display: block; margin: 20px 0 8px; }
-  .ledger li:nth-child(-n+3) .still { max-width: 640px; }
+  .wcard:first-child { grid-template-columns: 1fr; }
   .steps { grid-template-columns: repeat(3, 1fr); }
   .ctiles { grid-template-columns: repeat(2, 1fr); }
 }
@@ -569,9 +558,8 @@ a.ctile:hover .ctile__go { background: var(--accent); transform: rotate(-45deg);
   .services__list li { padding: 18px; }
   .services__go { width: 40px; height: 40px; }
 
-  .ledger__row { grid-template-columns: 1fr auto; row-gap: 2px; min-height: 64px; padding: 10px 12px; margin: 0 -12px; }
-  .ledger__kind { grid-column: 1; grid-row: 2; }
-  .ledger__year { grid-row: 1; grid-column: 2; }
+  .workgrid { grid-template-columns: 1fr; }
+  .wcard { padding: 8px; }
 
   .versus__item, .versus__item--ours { grid-column: 1 / -1; }
   .versus__item--ours { margin-top: 36px; }
