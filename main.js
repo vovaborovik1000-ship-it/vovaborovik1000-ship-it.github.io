@@ -43,7 +43,8 @@
       ? '<a class="wcard__media" href="' + url + '" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true">' + still(w) + '</a>'
       : '<div class="wcard__media">' + still(w) + '</div>';
     var tags = (w.tags || []).map(function (t) { return '<li>' + esc(t) + '</li>'; }).join('');
-    return '<li class="wcard rv">' + media +
+    var badge = w.badge ? '<span class="wcard__badge">' + esc(w.badge) + '</span>' : '';
+    return '<li class="wcard rv"><div class="wcard__mwrap">' + media + badge + '</div>' +
       '<div class="wcard__body">' +
       '<p class="wcard__meta">' + [w.kind, w.year].filter(Boolean).map(esc).join(' · ') + '</p>' +
       '<h3 class="wcard__title">' + esc(w.title) + '</h3>' +

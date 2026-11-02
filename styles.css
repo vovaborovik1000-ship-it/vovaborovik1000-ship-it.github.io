@@ -586,3 +586,14 @@ a.ctile:hover .ctile__go { background: var(--accent); transform: rotate(-45deg);
   .foot__title { font-size: 9.2vw; }
   .foot__mark { font-size: 30vw; }
 }
+
+/* пометка на карточке работы, например «Демо-версия» */
+.wcard__mwrap { position: relative; }
+.wcard__badge {
+  position: absolute; top: 14px; left: 14px; z-index: 1;
+  padding: 8px 14px; border-radius: 999px;
+  background: var(--ink); color: var(--white);
+  font-size: var(--step-small); font-weight: 600;
+  pointer-events: none;
+}
+.wcard__badge::before { content: ""; display: inline-block; width: 8px; height: 8px; margin-right: 8px; border-radius: 50%; background: var(--accent); vertical-align: 1px; }
