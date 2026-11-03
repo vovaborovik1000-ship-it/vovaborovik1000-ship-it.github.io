@@ -183,6 +183,7 @@ fieldset { border: 0; margin: 0; padding: 0; min-width: 0; }
 }
 .hero__lead { max-width: 34ch; font-size: var(--step-lead); line-height: 1.4; text-align: center; text-wrap: balance; color: rgba(255,255,255,.86); }
 .hero__actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; }
+.hero__shots { display: none; }
 
 /* ---------- бегущая строка ---------- */
 .ticker { overflow: hidden; margin: 0 0 var(--gutter); padding: 18px 0; }
@@ -214,12 +215,13 @@ fieldset { border: 0; margin: 0; padding: 0; min-width: 0; }
 .stair__lead { margin-top: clamp(32px, 4vw, 56px); max-width: 38ch; font-size: var(--step-lead); line-height: 1.4; }
 .stair__note { margin-top: 20px; max-width: 46ch; color: var(--muted); }
 .stair__photos { display: grid; gap: 12px; }
+.stair__photos { grid-template-columns: 1fr 1fr; align-items: start; }
 .stair__photos img {
-  width: 100%; aspect-ratio: 4/3; object-fit: cover; border-radius: var(--r-md);
+  width: 100%; aspect-ratio: 540/1169; object-fit: cover; object-position: top; border-radius: var(--r-md);
   transition: transform .6s var(--ease), border-radius .6s var(--ease);
 }
 .stair__photos img:hover { transform: scale(1.03) rotate(-.6deg); }
-.stair__photos img:nth-child(2) { margin-left: 18%; width: 82%; }
+.stair__photos img:nth-child(2) { margin-top: 18%; }
 
 /* ---------- услуги ---------- */
 .services__list { display: grid; gap: 8px; }
@@ -437,7 +439,7 @@ fieldset { border: 0; margin: 0; padding: 0; min-width: 0; }
 .ctiles li:nth-child(4) .ctile { background: var(--butter); }
 a.ctile:hover { transform: translateY(-5px); }
 .ctile__k { font-size: var(--step-small); color: var(--muted); }
-.ctile__v { margin-top: auto; font-weight: 600; font-size: clamp(1rem, .9rem + .4vw, 1.1875rem); letter-spacing: -0.01em; overflow-wrap: anywhere; }
+.ctile__v { margin-top: auto; font-weight: 600; font-size: clamp(1rem, .9rem + .4vw, 1.1875rem); letter-spacing: -0.01em; overflow-wrap: normal; word-break: normal; }
 .ctile__go {
   position: absolute; top: 18px; right: 18px;
   width: 38px; height: 38px; border-radius: 50%; display: grid; place-items: center;
@@ -521,7 +523,7 @@ a.ctile:hover .ctile__go { background: var(--accent); transform: rotate(-45deg);
   .head p { margin-top: 20px; }
   .stair { grid-template-columns: minmax(0, 1fr); }
   .stair__photos { grid-template-columns: 1fr 1fr; margin-top: 40px; }
-  .stair__photos img:nth-child(2) { margin: 32px 0 0; width: 100%; }
+  .stair__photos img:nth-child(2) { margin: 32px 0 0; }
   .services__name, .services__desc { grid-column: 1 / 12; }
   .services__desc { margin-top: 8px; }
   .services__go { grid-column: 12; grid-row: 1 / span 2; }
@@ -545,8 +547,24 @@ a.ctile:hover .ctile__go { background: var(--accent); transform: rotate(-45deg);
   .bar.scrolled { height: 58px; }
   .bar__cta { display: none; }
 
-  .hero { --seam: 40%; }
-  .hero__title { font-size: 10.2vw; }
+  /* телефон: сверху коллаж из демо, заголовок целиком на тёмном поле */
+  .hero { --seam: 44%; }
+  .hero__shots {
+    position: absolute; left: 0; right: 0; top: 0; height: var(--seam);
+    display: flex; justify-content: center; align-items: flex-end; gap: 10px;
+    padding: 0 16px; overflow: hidden;
+  }
+  .hero__shots img {
+    width: 31%; aspect-ratio: 540/1169; object-fit: cover; object-position: top;
+    border-radius: 16px 16px 0 0; transform: translateY(14%);
+  }
+  .hero__shots img:nth-child(2) { transform: translateY(4%); }
+  .js .hero__shots img { animation: riseSmall 1s var(--ease) both; }
+  .js .hero__shots img:nth-child(2) { animation-delay: .08s; }
+  .js .hero__shots img:nth-child(3) { animation-delay: .16s; }
+  .hero__title { font-size: 10.2vw; top: calc(var(--seam) + 28px); }
+  .hero__copy--top { display: none; }
+  .hero__copy--bottom { clip-path: none; }
   .hero__lead { font-size: var(--step-body); max-width: 28ch; }
   .hero__actions { flex-direction: column; align-items: stretch; width: 100%; max-width: 320px; }
 

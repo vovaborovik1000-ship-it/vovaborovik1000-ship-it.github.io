@@ -82,20 +82,13 @@
       '</article>';
   }).join('');
 
-  // Пока кейсов нет — заглушка: как будет выглядеть разбор
-  if (!(S.cases || []).length) {
-    $('#caseList').innerHTML = '<article class="case">' +
-      '<div class="case__text">' +
-      '<h3 class="case__title rv">Следующий кейс — ваш</h3>' +
-      '<p class="case__meta rv">Так выглядит разбор каждого проекта</p>' +
-      '<p class="rv"><b>Задача.</b> С чем вы пришли: мало заявок, устаревший сайт или сайта нет вовсе.</p>' +
-      '<p class="rv"><b>Решение.</b> Что я сделал: структура, тексты, дизайн, разработка и запуск под вашу задачу.</p>' +
-      '<p class="case__result rv"><b>Результат.</b> Измеримый итог: сколько заявок и клиентов принёс новый сайт.</p>' +
-      '<a class="btn btn--accent case__cta rv" href="#contact">Стать следующим кейсом</a>' +
-      '</div>' +
-      '<div class="case__media rv">' + still({ title: 'Ваш бизнес', kind: 'Ваш проект', tagline: 'Ваш новый сайт', colors: ['#141416', '#ffffff', '#d4f458'] }) + '</div>' +
-      '</article>';
+  // Пока кейсов нет — раздела нет: появится сам, как только в content.js будет первый кейс
+  function dropSection(id) {
+    var sec = document.getElementById(id);
+    if (sec) sec.remove();
+    $$('a[href="#' + id + '"]').forEach(function (a) { a.remove(); });
   }
+  if (!(S.cases || []).length) dropSection('cases');
 
   /* ---------- отзывы ---------- */
   var PENDING_KEY = 'portfolio-pending-reviews';
@@ -141,12 +134,14 @@
     })).join('');
     $('#reviewList').innerHTML = html || '<p class="reviews__empty">Я собираю первые отзывы. Если мы работали вместе — буду благодарен за пару честных слов.</p>';
   }
-  renderSpread();
-  renderReviews();
+  // Пока отзывов нет — раздела нет: появится сам с первым отзывом в content.js
+  var hasReviews = (S.reviews || []).length > 0;
+  if (!hasReviews) dropSection('reviews');
+  else { renderSpread(); renderReviews(); }
 
   var form = $('#reviewForm');
   var rStatus = $('#reviewStatus');
-  form.addEventListener('submit', function (e) {
+  if (form) form.addEventListener('submit', function (e) {
     e.preventDefault();
     var name = form.name.value.trim();
     var text = form.text.value.trim();
@@ -184,7 +179,7 @@
   function tile(k, v, href, ext) {
     if (!v) return '';
     return '<li class="rv"><a class="ctile" href="' + esc(href) + '"' + (ext ? ' target="_blank" rel="noopener"' : '') + '>' +
-      '<span class="ctile__k">' + k + '</span><span class="ctile__v">' + esc(v) + '</span>' +
+      '<span class="ctile__k">' + k + '</span><span class="ctile__v">' + esc(v).replace('@', '@<wbr>') + '</span>' +
       '<span class="ctile__go" aria-hidden="true">→</span></a></li>';
   }
   $('#contactTiles').innerHTML =
@@ -201,7 +196,9 @@
   if (C.vk) links.push('<a href="' + esc(C.vk) + '" target="_blank" rel="noopener">ВКонтакте</a>');
   if (C.instagram) links.push('<a href="' + esc(C.instagram) + '" target="_blank" rel="noopener">Instagram</a>');
   $('#footLinks').innerHTML = (links.length ? links : ['<span class="muted">Контакты скоро появятся</span>'])
-    .concat(['<a href="#work">Работы</a>', '<a href="#cases">Кейсы</a>', '<a href="#reviews">Отзывы</a>'])
+    .concat(['<a href="#work">Работы</a>']
+      .concat(document.getElementById('cases') ? ['<a href="#cases">Кейсы</a>'] : [])
+      .concat(document.getElementById('reviews') ? ['<a href="#reviews">Отзывы</a>'] : []))
     .map(function (l) { return '<li>' + l + '</li>'; }).join('');
 
   /* ---------- конструктор заявки ---------- */
